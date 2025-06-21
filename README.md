@@ -3,6 +3,10 @@
 ### Environment Variables
 
 Anda dapat mengatur environment variables pada container ini untuk menyesuaikan konfigurasi PHP atau aplikasi Anda. Contoh penggunaan environment variable pada `docker run`:
+```sh
+
+docker run -p 8080:80 -v /path/to/your/php/app:/var/www/html wisnuflash/php7.0-ioncube:v1.0
+```
 
 Beberapa environment variable umum:
 # System timezone
