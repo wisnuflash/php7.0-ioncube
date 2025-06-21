@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  web:
+    #build: .
+    image: php7.0-ioncube:v1.0
+    ports:
+      - "8080:80"
+    volumes:
+      - ./src:/var/www/html:rw
+      #- ./config/php.ini:/etc/php/7.0/apache/php.ini:rw
+    environment:
+      # System timezone
+      - TZ=Asia/Jakarta
+      
+      # PHP Configuration
+      - PHP_MEMORY_LIMIT=512M
+      - PHP_MAX_EXECUTION_TIME=180
+      - PHP_POST_MAX_SIZE=50M
+      - PHP_UPLOAD_MAX_FILESIZE=20M
+      - PHP_MAX_INPUT_VARS=3000
+      - PHP_DATE_TIMEZONE=Asia/Jakarta
+      - PHP_DISPLAY_ERRORS=On
+      - PHP_LOG_ERRORS=On
+      - PHP_ERROR_REPORTING=E_ALL
+    
+    # Alternatif: gunakan file .env
+    # env_file:
+    #   - .env
+
+  # Contoh service database (opsional)
+#   db:
+#     image: mysql:5.7
+#     environment:
+#       - MYSQL_ROOT_PASSWORD=rootpassword
+#       - MYSQL_DATABASE=myapp
+#       - MYSQL_USER=appuser
+#       - MYSQL_PASSWORD=apppassword
+#     volumes:
+#       - db_data:/var/lib/mysql
+#     ports:
+#       - "3306:3306"
+
+# volumes:
+#   db_data:
