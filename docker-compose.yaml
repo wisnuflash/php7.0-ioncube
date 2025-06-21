@@ -20,8 +20,8 @@ services:
       - PHP_UPLOAD_MAX_FILESIZE=20M
       - PHP_MAX_INPUT_VARS=3000
       - PHP_DATE_TIMEZONE=Asia/Jakarta
-      - PHP_DISPLAY_ERRORS=On
-      - PHP_LOG_ERRORS=On
+      - PHP_DISPLAY_ERRORS=Off
+      - PHP_LOG_ERRORS=Off
       - PHP_ERROR_REPORTING=E_ALL
     
     # Alternatif: gunakan file .env
