@@ -2,8 +2,8 @@ version: '3.8'
 
 services:
   web:
-    #build: .
-    image: php7.0-ioncube:v1.0
+    build: .
+    # image: php7.4-ioncube:v1.0
     ports:
       - "8080:80"
     volumes:

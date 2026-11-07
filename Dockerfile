@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 # Set environment variables to avoid interactive prompts
 ENV DEBIAN_FRONTEND=noninteractive
@@ -29,17 +29,17 @@ RUN apt-get update && apt-get install -y \
 # Install Apache and PHP 7.0 from the PPA
 RUN apt-get install -y \
     apache2 \
-    php7.0 \
-    php7.0-cli \
-    php7.0-mysql \
-    php7.0-xml \
-    php7.0-gd \
-    php7.0-curl \
-    php7.0-mbstring \
-    php7.0-zip \
-    php7.0-intl \
-    php7.0-bcmath \
-    libapache2-mod-php7.0 \
+    php7.4 \
+    php7.4-cli \
+    php7.4-mysql \
+    php7.4-xml \
+    php7.4-gd \
+    php7.4-curl \
+    php7.4-mbstring \
+    php7.4-zip \
+    php7.4-intl \
+    php7.4-bcmath \
+    libapache2-mod-php7.4 \
     wget \
     unzip \
     curl \
@@ -95,9 +95,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN wget https://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz \
     && tar -xzf ioncube_loaders_lin_x86-64.tar.gz \
     && PHP_EXT_DIR=$(php -r "echo ini_get('extension_dir');") \
-    && mv ioncube/ioncube_loader_lin_7.0.so $PHP_EXT_DIR \
-    && echo "zend_extension=$PHP_EXT_DIR/ioncube_loader_lin_7.0.so" > /etc/php/7.0/apache2/conf.d/00-ioncube.ini \
-    && echo "zend_extension=$PHP_EXT_DIR/ioncube_loader_lin_7.0.so" > /etc/php/7.0/cli/conf.d/00-ioncube.ini \
+    && mv ioncube/ioncube_loader_lin_7.4.so $PHP_EXT_DIR \
+    && echo "zend_extension=$PHP_EXT_DIR/ioncube_loader_lin_7.4.so" > /etc/php/7.4/apache2/conf.d/00-ioncube.ini \
+    && echo "zend_extension=$PHP_EXT_DIR/ioncube_loader_lin_7.4.so" > /etc/php/7.4/cli/conf.d/00-ioncube.ini \
     && rm -rf ioncube*
 
 # Create startup script
@@ -117,7 +117,7 @@ RUN echo '#!/bin/bash' > /start.sh && \
     echo 'fi' >> /start.sh && \
     echo '' >> /start.sh && \
     echo '# Generate PHP configuration' >> /start.sh && \
-    echo 'cat > /etc/php/7.0/apache2/conf.d/99-custom.ini << EOF' >> /start.sh && \
+    echo 'cat > /etc/php/7.4/apache2/conf.d/99-custom.ini << EOF' >> /start.sh && \
     echo '; Custom PHP Configuration from Environment Variables' >> /start.sh && \
     echo 'memory_limit = ${PHP_MEMORY_LIMIT}' >> /start.sh && \
     echo 'max_execution_time = ${PHP_MAX_EXECUTION_TIME}' >> /start.sh && \
@@ -131,7 +131,7 @@ RUN echo '#!/bin/bash' > /start.sh && \
     echo 'EOF' >> /start.sh && \
     echo '' >> /start.sh && \
     echo '# Copy PHP config for CLI' >> /start.sh && \
-    echo 'cp /etc/php/7.0/apache2/conf.d/99-custom.ini /etc/php/7.0/cli/conf.d/99-custom.ini' >> /start.sh && \
+    echo 'cp /etc/php/7.4/apache2/conf.d/99-custom.ini /etc/php/7.4/cli/conf.d/99-custom.ini' >> /start.sh && \
     echo '' >> /start.sh && \
     echo '# Create document root if it does not exist' >> /start.sh && \
     echo 'mkdir -p /var/www/html' >> /start.sh && \
